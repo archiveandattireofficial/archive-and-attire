@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive & Attire — The Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Libre+Baskerville:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --maroon:#5C1A24; --charcoal:#1F1A17; --gold:#C9A876;
+    --taupe:#A0876D; --beige:#EDE1D1; --cream:#F7F1E8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--charcoal);font-family:'Inter',sans-serif;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  h1,h2,h3,.display{font-family:'Italiana',serif;font-weight:400;letter-spacing:.01em;}
+  .lede{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--maroon);}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;width:100%;height:100%;object-fit:cover;}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe);font-weight:600;}
+  .divider{width:52px;height:1px;background:var(--gold);margin:24px auto;border:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  /* ============ HEADER ============ */
+  header{position:sticky;top:0;z-index:100;background:rgba(247,241,232,.92);backdrop-filter:blur(6px);border-bottom:1px solid rgba(160,135,109,.25);}
+  .headbar{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;max-width:1180px;margin:0 auto;}
+  .logo-mark{display:flex;align-items:center;gap:10px;}
+  .logo-mark svg{width:34px;height:34px;flex-shrink:0;}
+  .logo-text{display:flex;flex-direction:column;line-height:1;}
+  .logo-text .name{font-family:'Italiana',serif;font-size:1.28rem;letter-spacing:.06em;}
+  .logo-text .sub{font-size:.58rem;letter-spacing:.28em;color:var(--taupe);margin-top:4px;}
+  nav.primary ul{display:flex;gap:38px;list-style:none;}
+  nav.primary a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;position:relative;padding-bottom:4px;}
+  nav.primary a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .25s ease;}
+  nav.primary a:hover::after,nav.primary a.active::after{width:100%;}
+  nav.primary a.active{color:var(--maroon);}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;}
+  .nav-toggle span{width:22px;height:1px;background:var(--charcoal);}
+
+  /* ============ BRAND INTRO ============ */
+  .brand-intro{padding:90px 0 78px;text-align:center;}
+  .brand-intro .mark{width:66px;height:66px;margin:0 auto 22px;}
+  .brand-intro .name{font-family:'Italiana',serif;font-size:34px;letter-spacing:.08em;color:var(--maroon);margin-bottom:6px;}
+  .brand-intro .sub{font-size:.62rem;letter-spacing:.32em;color:var(--taupe);text-transform:uppercase;margin-bottom:28px;}
+  .brand-intro p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:16.5px;line-height:1.8;color:#5A4E44;max-width:520px;margin:0 auto;}
+
+  /* ============ JOURNAL — SINGLE CARD ============ */
+  .journal-section{padding-bottom:90px;}
+  .journal-section .journal-heading{text-align:center;margin-bottom:40px;}
+  .journal-section .journal-heading h2{font-size:26px;color:var(--charcoal);margin-bottom:8px;}
+  .journal-section .journal-heading p{font-size:13px;color:var(--taupe);}
+
+  .feature-card{
+    display:block;max-width:880px;margin:0 auto;
+    border:1px solid rgba(160,135,109,.3);background:#fff;
+    overflow:hidden;transition:box-shadow .3s ease;
+  }
+  .feature-card:hover{box-shadow:0 18px 40px -20px rgba(28,20,17,.25);}
+  .feature-img{height:420px;overflow:hidden;position:relative;}
+  .feature-img img{filter:sepia(.1) saturate(.92) contrast(1.03);transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+  .feature-card:hover .feature-img img{transform:scale(1.045);}
+  .feature-tag{position:absolute;top:20px;left:20px;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream);background:rgba(28,20,17,.55);padding:6px 14px;}
+  .feature-body{padding:44px 48px;}
+  .feature-body h3{font-size:28px;line-height:1.28;color:var(--charcoal);margin:14px 0 16px;}
+  .feature-body p.excerpt{font-size:14.5px;line-height:1.8;color:#5A4E44;margin-bottom:24px;max-width:600px;}
+  .byline-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .byline{display:flex;align-items:center;gap:12px;}
+  .byline .avatar{width:32px;height:32px;border-radius:50%;background:var(--maroon);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Italiana',serif;font-size:14px;flex-shrink:0;}
+  .byline .who{font-size:.7rem;letter-spacing:.04em;color:var(--taupe);}
+  .byline .who b{color:var(--charcoal);font-weight:600;}
+  .read-link{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--maroon);display:inline-flex;align-items:center;gap:8px;width:fit-content;border-bottom:1px solid var(--maroon);padding-bottom:4px;transition:gap .2s ease;}
+  .feature-card:hover .read-link{gap:14px;}
+  .read-link svg{width:15px;height:15px;}
+
+  /* ============ COMING SOON ============ */
+  .coming-soon{padding:0 0 100px;text-align:center;}
+  .coming-soon .glyph{
+    width:42px;height:42px;margin:0 auto 22px;
+    border:1px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .coming-soon .glyph svg{width:17px;height:17px;}
+  .coming-soon .eyebrow{margin-bottom:14px;}
+  .coming-soon h3{font-size:22px;font-style:italic;color:var(--maroon);max-width:440px;margin:0 auto 12px;line-height:1.4;}
+  .coming-soon p{font-size:13px;color:#6B5D52;max-width:400px;margin:0 auto;line-height:1.8;}
+
+  /* ============ NEWSLETTER ============ */
+  .invite{padding:0 0 100px;}
+  .invite-card{background:var(--maroon);color:var(--cream);padding:72px 60px;text-align:center;}
+  .invite-card .eyebrow{color:var(--gold);}
+  .invite-card h2{font-size:clamp(28px,4vw,38px);font-style:italic;max-width:520px;margin:16px auto 18px;line-height:1.3;}
+  .invite-card p{font-size:13.5px;color:#E8C9C9;max-width:420px;margin:0 auto 32px;line-height:1.75;}
+  .invite-form{display:flex;max-width:420px;margin:0 auto;border-bottom:1px solid rgba(247,241,232,.35);padding-bottom:14px;}
+  .invite-form input{flex:1;background:transparent;border:none;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;outline:none;}
+  .invite-form input::placeholder{color:#C9A6A6;}
+  .invite-form button{background:none;border:none;color:var(--gold);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;}
+  .invite-note{font-size:.62rem;color:#C9A6A6;margin-top:16px !important;}
+
+  /* ============ FOOTER ============ */
+  footer{padding:0 0 40px;}
+  .footer-grid{max-width:1180px;margin:0 auto;padding:0 40px 48px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;border-bottom:1px solid rgba(160,135,109,.25);}
+  .footer-brand p{font-size:12.5px;line-height:1.8;color:#6B5D52;max-width:260px;margin-top:14px;}
+  .footer-col h4{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--maroon);margin-bottom:18px;font-weight:600;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:11px;}
+  .footer-col ul li a{font-size:13px;color:#5A4E44;transition:color .2s ease;}
+  .footer-col ul li a:hover{color:var(--maroon);}
+  .footer-bottom{max-width:1180px;margin:0 auto;padding:26px 40px 0;display:flex;justify-content:space-between;font-size:.66rem;color:var(--taupe);}
+
+  @media (max-width:640px){
+    .headbar{padding:18px 22px;}
+    .wrap{padding:0 22px;}
+    nav.primary{position:fixed;top:73px;left:0;right:0;bottom:0;background:var(--cream);flex-direction:column;padding:40px 28px;transform:translateX(100%);transition:transform .3s ease;z-index:90;}
+    nav.primary.open{transform:translateX(0);}
+    nav.primary ul{flex-direction:column;gap:26px;}
+    nav.primary a{font-size:15px;}
+    .nav-toggle{display:flex;}
+    .brand-intro{padding:64px 0 56px;}
+    .feature-img{height:260px;}
+    .feature-body{padding:32px 26px;}
+    .byline-row{flex-direction:column;align-items:flex-start;}
+    .invite-card{padding:52px 26px;}
+    .invite-form{flex-direction:column;gap:16px;border-bottom:none;}
+    .invite-form input{border-bottom:1px solid rgba(247,241,232,.35);padding-bottom:12px;}
+    .footer-grid{flex-direction:column;padding:0 22px 40px;}
+    .footer-bottom{flex-direction:column;gap:10px;padding:26px 22px 0;}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+  :focus-visible{outline:2px solid var(--maroon);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <a href="journal.html" class="logo-mark">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 12 L28 82 L38 82 L45 58 L55 58 L62 82 L72 82 Z M42 50 L50 26 L58 50 Z" fill="#5C1A24"/>
+        <path d="M50 18 Q66 30 74 74 Q60 62 50 62 Q40 62 30 74 Q38 30 50 18 Z" fill="none" stroke="#C9A876" stroke-width="1.6" opacity=".85"/>
+      </svg>
+      <span class="logo-text"><span class="name">Archive &amp; Attire</span><span class="sub">EDITORIAL</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="primary" id="primaryNav">
+      <ul>
+        <li><a href="journal.html">Home</a></li>
+        <li><a href="journal.html" class="active">Journal</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="brand-intro">
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 12 L28 82 L38 82 L45 58 L55 58 L62 82 L72 82 Z M42 50 L50 26 L58 50 Z" fill="#5C1A24"/>
+      <path d="M50 18 Q66 30 74 74 Q60 62 50 62 Q40 62 30 74 Q38 30 50 18 Z" fill="none" stroke="#C9A876" stroke-width="1.6" opacity=".85"/>
+    </svg>
+    <div class="name">Archive &amp; Attire</div>
+    <div class="sub">Editorial</div>
+    <p>An editorial fashion journal for people who dress with intention — documenting quiet luxury, considered tailoring, and the neutrals that never go out of season.</p>
+  </div>
+</section>
+
+<section class="journal-section">
+  <div class="wrap">
+    <div class="journal-heading">
+      <h2>From the Journal</h2>
+      <p>Entry N&deg; 001</p>
+    </div>
+
+    <a href="posts/fashion-trends-comeback.html" class="feature-card">
+      <div class="feature-img">
+        <span class="feature-tag">Style Notes</span>
+        <img src="assets/featured-styling.png" alt="A woman in a black turtleneck and wide-leg trousers, an example of considered, personal styling">
+      </div>
+      <div class="feature-body">
+        <p class="eyebrow">Psychology of Style — 3 min read</p>
+        <h3>The Ultimate Comeback: Why Fashion Trends Always Return</h3>
+        <p class="excerpt">Have you ever looked at an old photo of your parents and thought, "I'd actually wear that outfit today?" From low-rise denim to '90s grunge, trends don't disappear — they wait for the right generation to bring them back.</p>
+        <div class="byline-row">
+          <div class="byline">
+            <span class="avatar">A</span>
+            <span class="who">By <b>Archive &amp; Attire</b> &middot; July 2026</span>
+          </div>
+          <span class="read-link">Read the full story
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="coming-soon">
+  <div class="wrap">
+    <div class="glyph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C9A876" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+    </div>
+    <p class="eyebrow">More on the Way</p>
+    <h3>New entries are being written, one considered piece at a time.</h3>
+    <p>We're not chasing a publishing schedule — only writing when there's something worth saying. Check back soon for the next entry in the archive.</p>
+  </div>
+</section>
+
+<section class="invite">
+  <div class="wrap">
+    <div class="invite-card">
+      <p class="eyebrow">By Invitation, Weekly</p>
+      <h2>Join the Archive</h2>
+      <p>One dispatch a week on why we dress the way we do — no trend alerts, just honest notes on style, psychology, and the industry behind it.</p>
+      <form class="invite-form" id="newsletterForm" onsubmit="return false;">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Request Entry</button>
+      </form>
+      <p class="invite-note">Unsubscribe whenever you like. We'll miss you, but we'll understand.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-mark logo-text"><span class="name">Archive &amp; Attire</span></span>
+      <p>An editorial fashion journal exploring the psychology behind fashion trends, the industry that shapes them, and the art of clothes styling.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Journal</h4>
+      <ul>
+        <li><a href="journal.html">Latest Entry</a></li>
+        <li><a href="posts/fashion-trends-comeback.html">The Ultimate Comeback</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/amenaarchives?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://pin.it/4OS6RdRPB" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Archive &amp; Attire Editorial. All rights reserved.</span>
+    <span>Designed with restraint.</span>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const primaryNav = document.getElementById('primaryNav');
+  navToggle.addEventListener('click', () => {
+    const open = primaryNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const original = btn.textContent;
+    btn.textContent = 'Welcome to the archive';
+    e.target.querySelector('input').value = '';
+    setTimeout(() => btn.textContent = original, 2400);
+  });
+</script>
+
+</body>
+</html>
