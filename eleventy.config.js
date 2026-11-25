@@ -1,11 +1,16 @@
 module.exports = function (eleventyConfig) {
-  // Copy these as-is into the finished site
+  // Purani files jaisi hain waisi copy karo
   eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("posts");
   eleventyConfig.addPassthroughCopy("styles.css");
   eleventyConfig.addPassthroughCopy("nav.js");
+  eleventyConfig.addPassthroughCopy("*.html");
 
-  // Leave my existing HTML pages untouched
+  // README ko site mein mat daalo
+  eleventyConfig.ignores.add("README.md");
+
+  // Eleventy sirf Markdown (naye posts) banayega
   return {
-    htmlTemplateEngine: false
+    templateFormats: ["md"]
   };
 };
