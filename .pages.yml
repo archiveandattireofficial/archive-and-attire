@@ -1,0 +1,31 @@
+media:
+  input: assets
+  output: /assets
+content:
+  - name: blog
+    label: Blog posts
+    type: collection
+    path: blog
+    fields:
+      - name: layout
+        type: string
+        hidden: true
+        default: post.njk
+      - name: title
+        label: Title
+        type: string
+      - name: category
+        label: Category
+        type: string
+      - name: description
+        label: Short description
+        type: text
+      - name: date
+        label: Date
+        type: date
+      - name: image
+        label: Cover image
+        type: image
+      - name: body
+        label: Text
+        type: rich-text
