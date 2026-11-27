@@ -1,16 +1,18 @@
 module.exports = function (eleventyConfig) {
-  // Purani files jaisi hain waisi copy karo
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("posts");
   eleventyConfig.addPassthroughCopy("styles.css");
   eleventyConfig.addPassthroughCopy("nav.js");
   eleventyConfig.addPassthroughCopy("*.html");
 
-  // README ko site mein mat daalo
   eleventyConfig.ignores.add("README.md");
 
-  // Eleventy sirf Markdown (naye posts) banayega
+  // New post (blog folder), newest first
+  eleventyConfig.addCollection("blog", function (api) {
+    return api.getFilesByGlob("blog/*.md").sort((a, b) => b.date - a.date);
+  });
+
   return {
-    templateFormats: ["md"]
+    templateFormats: ["md", "njk"]
   };
 };
