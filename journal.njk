@@ -46,7 +46,7 @@ permalink: journal.html
     <a href="{{ post.url }}" class="feature-card">
       <div class="feature-img">
         <span class="feature-tag">Journal</span>
-        {% if post.data.image %}<img src="{{ post.data.image }}" alt="{{ post.data.title }}">{% endif %}
+       {% if post.data.image %}<img src="{{ post.data.image }}" alt="{{ post.data.title }}">{% else %}<img src="assets/logo.png" alt="Archive &amp; Attire" style="object-fit:contain;padding:40px;">{% endif %}
       </div>
       <div class="feature-body">
         <span class="eyebrow">{{ post.data.category }}</span>
