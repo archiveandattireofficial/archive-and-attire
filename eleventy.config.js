@@ -7,9 +7,9 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.ignores.add("README.md");
 
-  // New post (blog folder), newest first
+  // new posts (blog folder), newest first
   eleventyConfig.addCollection("blog", function (api) {
-    return api.getFilesByGlob("blog/*.md").sort((a, b) => b.date - a.date);
+    return api.getFilteredByGlob("blog/*.md").sort((a, b) => b.date - a.date);
   });
 
   return {
